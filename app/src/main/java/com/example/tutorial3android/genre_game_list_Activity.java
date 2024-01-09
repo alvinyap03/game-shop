@@ -48,18 +48,18 @@ public class genre_game_list_Activity extends AppCompatActivity {
                 genreNameTextView.setText(genreName);
 
                 // Fetch games for the selected genre using GameManager
-                GameManager gameManager = new GameManager(this);
-                gameManager.open(); // Open the database connection
+                Game_dbManager gameDbManager = new Game_dbManager(this);
+                gameDbManager.open(); // Open the database connection
 
                 // Fetch games based on the selected genre ID
-                List<String> gameNamesForGenre = gameManager.getGameNamesByGenre(selectedGenre.getId());
+                List<String> gameNamesForGenre = gameDbManager.getGameNamesByGenre(selectedGenre.getId());
 
                 // Log the size and contents of the gameNamesForGenre
                 Log.d("GenreList", "GameNamesForGenre size: " + gameNamesForGenre.size());
                 Log.d("GenreList", "GameNamesForGenre contents: " + gameNamesForGenre);
 
                 // Close the database connection
-                gameManager.close();
+                gameDbManager.close();
 
                 // Initialize and set up the RecyclerView
                 setupRecyclerView(gameNamesForGenre);

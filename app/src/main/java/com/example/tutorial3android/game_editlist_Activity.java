@@ -22,7 +22,7 @@ public class game_editlist_Activity extends AppCompatActivity {
     private static final String TAG = "GameEditListActivity";
 
     private RecyclerView recyclerView;
-    private GameManager gameManager;
+    private Game_dbManager gameDbManager;
     private List<String> originalGameNames;
     private GameListAdapter adapter;
 
@@ -34,9 +34,9 @@ public class game_editlist_Activity extends AppCompatActivity {
         Log.d(TAG, "onCreate: Activity created");
 
         recyclerView = findViewById(R.id.recyclerView);
-        gameManager = new GameManager(this);
+        gameDbManager = new Game_dbManager(this);
 
-        originalGameNames = gameManager.getAllGameNames();
+        originalGameNames = gameDbManager.getAllGameNames();
 
         adapter = new GameListAdapter(originalGameNames);
         recyclerView.setAdapter(adapter);
@@ -75,7 +75,7 @@ public class game_editlist_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Delete all games from the database
-                gameManager.deleteAllGames();
+                gameDbManager.deleteAllGames();
 
                 // Clear the list in the adapter without updating the RecyclerView
                 adapter.clearList();
@@ -117,7 +117,7 @@ public class game_editlist_Activity extends AppCompatActivity {
 
 
     private void startDeleteGameActivity(String selectedGameName) {
-        game_data selectedGameData = gameManager.getGameByName(selectedGameName);
+        game_data selectedGameData = gameDbManager.getGameByName(selectedGameName);
 
         Intent intent = new Intent(game_editlist_Activity.this, DeletegameActivity.class);
         intent.putExtra("selectedGameData", (Parcelable) selectedGameData);

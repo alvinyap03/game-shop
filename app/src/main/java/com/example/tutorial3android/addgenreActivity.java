@@ -14,7 +14,7 @@ public class addgenreActivity extends AppCompatActivity {
     private EditText genreNameEditText;
     private Button backButton, viewButton, addButton;
     private GenreHelper genreHelper;
-    private GenreManager genreManager;
+    private Genre_dbManager genreDbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class addgenreActivity extends AppCompatActivity {
 
         // Pass the context (which is 'this') to the GenreHelper constructor
         genreHelper = new GenreHelper(this);
-        genreManager = new GenreManager(this);
+        genreDbManager = new Genre_dbManager(this);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +64,10 @@ public class addgenreActivity extends AppCompatActivity {
         }
 
         try {
-            genreManager.open();
+            genreDbManager.open();
 
             // Check if the genre name already exists in the database
-            if (genreManager.isGenreExists(genreName)) {
+            if (genreDbManager.isGenreExists(genreName)) {
                 genreHelper.showToast("Genre already exists");
             } else {
                 // Pass appropriate arguments to the GenreData constructor
@@ -75,7 +75,7 @@ public class addgenreActivity extends AppCompatActivity {
 
                 // Check if the genreData is not null before attempting to insert
                 if (genreData != null) {
-                    long result = genreManager.insertGenre(genreData);
+                    long result = genreDbManager.insertGenre(genreData);
 
                     if (result != -1) {
                         genreHelper.showToast("Genre added successfully!");
@@ -91,7 +91,7 @@ public class addgenreActivity extends AppCompatActivity {
         } catch (SQLiteException e) {
             e.printStackTrace(); // Handle the exception as needed
         } finally {
-            genreManager.close();
+            genreDbManager.close();
         }
     }
 

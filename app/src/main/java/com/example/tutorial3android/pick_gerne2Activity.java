@@ -22,7 +22,7 @@ public class pick_gerne2Activity extends AppCompatActivity {
 
     private ListView genreListView;
     private Button backButton, nextButton;
-    private GenreManager genreManager;
+    private Genre_dbManager genreDbManager;
     private List<GenreData> genreDataList;
     private GenreDataAdapter adapter;
     private Set<GenreData> selectedGenres = new HashSet<>();
@@ -42,8 +42,8 @@ public class pick_gerne2Activity extends AppCompatActivity {
         backButton = findViewById(R.id.button7);
         nextButton = findViewById(R.id.button8);
 
-        genreManager = new GenreManager(this);
-        genreManager.open();
+        genreDbManager = new Genre_dbManager(this);
+        genreDbManager.open();
 
         Intent intent = getIntent();
         gameName = intent.getStringExtra("gameName");
@@ -59,13 +59,13 @@ public class pick_gerne2Activity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if (genreManager != null) {
-            genreManager.close();
+        if (genreDbManager != null) {
+            genreDbManager.close();
         }
     }
 
     private void initializeViews() {
-        genreDataList = genreManager.getAllGenresList();
+        genreDataList = genreDbManager.getAllGenresList();
 
         for (GenreData genre : genreDataList) {
             if (genre != null) {
@@ -137,7 +137,7 @@ public class pick_gerne2Activity extends AppCompatActivity {
                             description,
                             convertGenreSetToList(selectedGenres));
 
-            long gameId = new GameManager(pick_gerne2Activity.this).updateGame(gameData);
+            long gameId = new Game_dbManager(pick_gerne2Activity.this).updateGame(gameData);
 
             if (gameId != -1) {
                 Intent adminIntent = new Intent(pick_gerne2Activity.this, game_editlist_Activity.class);

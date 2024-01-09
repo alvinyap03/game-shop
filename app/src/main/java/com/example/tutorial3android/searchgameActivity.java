@@ -22,7 +22,7 @@ public class searchgameActivity extends AppCompatActivity {
     private static final String TAG = "GameEditListActivity";
 
     private RecyclerView recyclerView;
-    private GameManager gameManager;
+    private Game_dbManager gameDbManager;
     private List<String> originalGameNames;
     private GameListAdapter adapter;
 
@@ -34,9 +34,9 @@ public class searchgameActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: Activity created");
 
         recyclerView = findViewById(R.id.recyclerView);
-        gameManager = new GameManager(this);
+        gameDbManager = new Game_dbManager(this);
 
-        originalGameNames = gameManager.getAllGameNames();
+        originalGameNames = gameDbManager.getAllGameNames();
 
         adapter = new GameListAdapter(originalGameNames);
         recyclerView.setAdapter(adapter);
@@ -105,7 +105,7 @@ public class searchgameActivity extends AppCompatActivity {
 
 
     private void startbuygameActivity(String selectedGameName) {
-        game_data selectedGameData = gameManager.getGameByName(selectedGameName);
+        game_data selectedGameData = gameDbManager.getGameByName(selectedGameName);
 
         if (selectedGameData != null) {
             Log.d(TAG, "startbuygameActivity: Selected Game Data - Name: " + selectedGameData.getName()

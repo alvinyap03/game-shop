@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DeletegameActivity extends AppCompatActivity {
 
     private EditText gameNameEditText, gamepriceEditText, gamedescriptionEditText;
-    private GameManager gameManager;
+    private Game_dbManager gameDbManager;
     private Button backButton, deleteButton, editButton;
 
     @Override
@@ -29,7 +29,7 @@ public class DeletegameActivity extends AppCompatActivity {
         gameNameEditText = findViewById(R.id.gamename);
         gamepriceEditText = findViewById(R.id.price);
         gamedescriptionEditText = findViewById(R.id.description);
-        gameManager = new GameManager(this);
+        gameDbManager = new Game_dbManager(this);
 
         // Retrieve the selected game data from the intent
         game_data selectedGameData = getIntent().getParcelableExtra("selectedGameData");
@@ -48,7 +48,7 @@ public class DeletegameActivity extends AppCompatActivity {
                 String gameName = gameNameEditText.getText().toString();
 
                 // Delete the game data from SQLite
-                boolean success = gameManager.deleteGameByName(gameName);
+                boolean success = gameDbManager.deleteGameByName(gameName);
 
                 if (success) {
                     // If deletion is successful, go back to game_editlist_Activity
@@ -57,7 +57,7 @@ public class DeletegameActivity extends AppCompatActivity {
                     finish(); // Finish the current activity to prevent going back to it from the next activity
                 } else {
                     // Handle deletion failure, e.g., display a toast
-                    gameManager.showToast("Failed to delete the game");
+                    gameDbManager.showToast("Failed to delete the game");
                 }
             }
         });
@@ -70,12 +70,12 @@ public class DeletegameActivity extends AppCompatActivity {
 
                 // Check if gameName is empty or null
                 if (TextUtils.isEmpty(gameName)) {
-                    gameManager.showToast("Please enter a valid game name");
+                    gameDbManager.showToast("Please enter a valid game name");
                     return;
                 }
 
                 // Retrieve the game data from SQLite based on the game name
-                game_data selectedGameData = gameManager.getGameByName(gameName);
+                game_data selectedGameData = gameDbManager.getGameByName(gameName);
 
                 if (selectedGameData != null) {
                     // If the game data is found, go to pick_gerne2Activity
@@ -84,7 +84,7 @@ public class DeletegameActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // Handle the case where the game data is not found, e.g., display a toast
-                    gameManager.showToast("Game not found");
+                    gameDbManager.showToast("Game not found");
                 }
             }
         });

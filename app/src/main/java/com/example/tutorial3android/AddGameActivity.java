@@ -19,7 +19,7 @@ public class AddGameActivity extends AppCompatActivity {
     private EditText gameNameEditText, priceEditText, descriptionEditText;
     private Button uploadButton, backButton;
     private GameHelper gameHelper;
-    private GameManager gameManager;
+    private Game_dbManager gameDbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class AddGameActivity extends AppCompatActivity {
         backButton = findViewById(R.id.button5);
 
         gameHelper = new GameHelper(gameNameEditText, priceEditText, descriptionEditText);
-        gameManager = new GameManager(this);
+        gameDbManager = new Game_dbManager(this);
 
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
