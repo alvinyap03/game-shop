@@ -1,6 +1,7 @@
 package com.example.tutorial3android;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -72,6 +73,11 @@ public class loginActivity extends AppCompatActivity {
 
                     if (admin != null && admin.getPassword().equals(password)) {
                         // Admin credentials are correct
+                        // Store username in SharedPreferences
+                        SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", username);
+                        editor.apply();
                         // You can add the logic to navigate to the admin page here
                         Toast.makeText(loginActivity.this, "Admin login successful", Toast.LENGTH_SHORT).show();
                         // Example: Navigate to admin page
@@ -87,7 +93,11 @@ public class loginActivity extends AppCompatActivity {
 
                     if (user != null && user.getPassword().equals(password)) {
                         // User credentials are correct
-                        // You can add the logic to navigate to the user page here
+                        // Store username in SharedPreferences
+                        SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", username);
+                        editor.apply();                        // You can add the logic to navigate to the user page here
                         Toast.makeText(loginActivity.this, "User login successful", Toast.LENGTH_SHORT).show();
                         // Example: Navigate to user page
                         Intent userIntent = new Intent(loginActivity.this, usermenuActivity.class);

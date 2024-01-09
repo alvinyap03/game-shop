@@ -84,6 +84,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
             if (!newList.isEmpty()) {
                 gameNames.clear();
                 gameNames.addAll(newList);
+                Log.d(TAG, "updateList: List updated with new data");
             }
 
             int newSize = gameNames.size();

@@ -3,6 +3,7 @@ package com.example.tutorial3android;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log; // Import Log class
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 public class debit_cardActivity extends AppCompatActivity {
+
+    private static final String TAG = "DebitCardActivity"; // Define a tag for your logs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,9 @@ public class debit_cardActivity extends AppCompatActivity {
                     List<game_data> gameDataList = convertToGameData(selectedGameNames);
                     userData.getGames().addAll(gameDataList);
                     updateUserData(userData);
+
+                    // Log the updated UserData
+                    Log.d(TAG, "Updated UserData: " + userData.toString());
                 }
 
                 // Create NotificationData
@@ -61,8 +67,14 @@ public class debit_cardActivity extends AppCompatActivity {
                 NotificationData notificationData = new NotificationData(null, "system",
                         "You have bought games", new Date(), receivers);
 
+                // Log the NotificationData
+                Log.d(TAG, "NotificationData: " + notificationData.toString());
+
                 // Create IncomeData
                 IncomeData incomeData = new IncomeData(username, totalPrice, new Date(), selectedGameNames);
+
+                // Log the IncomeData
+                Log.d(TAG, "IncomeData: " + incomeData.toString());
 
                 // Save notificationData and incomeData to wherever needed
                 // For example, you can store them in a database or use them in your app as required

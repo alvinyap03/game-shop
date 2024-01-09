@@ -38,13 +38,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/playgamelist"
         android:layout_width="390dp"
         android:layout_height="520dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="1dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
