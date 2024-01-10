@@ -9,11 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 import java.util.Set;
 
-public class GenreDataAdapter extends ArrayAdapter<GenreData> {
+public class GenreDataAdapter extends ArrayAdapter<GenreData>  {
 
     private Context context;
     private List<GenreData> genreDataList;

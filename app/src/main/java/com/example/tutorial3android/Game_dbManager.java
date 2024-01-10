@@ -20,7 +20,7 @@ public class Game_dbManager extends SQLiteOpenHelper {
     private static final String GAME_IMAGE = "image";
 
     // Database Information
-    static final String DB_NAME = "FINANCIAL_GOAL.DB";
+    static final String DB_NAME = "GAME.DB";
     // Initial database version
     static final int DB_VERSION = 1;
 

@@ -49,10 +49,10 @@ public class genre_game_list_Activity extends AppCompatActivity {
 
                 // Fetch games for the selected genre using GameManager
                 Game_dbManager gameDbManager = new Game_dbManager(this);
-                gameDbManager.open(); // Open the database connection
+
 
                 // Fetch games based on the selected genre ID
-                List<String> gameNamesForGenre = gameDbManager.getGameNamesByGenre(selectedGenre.getId());
+                List<String> gameNamesForGenre = gameDbManager.getImageBytes(selectedGenre.getId());
 
                 // Log the size and contents of the gameNamesForGenre
                 Log.d("GenreList", "GameNamesForGenre size: " + gameNamesForGenre.size());

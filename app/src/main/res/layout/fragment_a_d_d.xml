@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    tools:context=".ADDFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/create_genre_btn"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="175dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginBottom="325dp"
+            android:backgroundTint="@color/dark_blue"
+            android:drawableStart="@drawable/add_icon"
+            android:drawableTint="@color/white"
+            android:text="@string/create_genre"
+            android:textSize="15sp"
+            android:textStyle="bold|normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/create_game_btn"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginBottom="150dp"
+            android:backgroundTint="@color/red"
+            android:drawableStart="@drawable/add_icon"
+            android:drawableTint="@color/white"
+            android:text="@string/create_game"
+            android:textSize="15sp"
+            android:textStyle="bold|normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

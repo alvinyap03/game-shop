@@ -39,13 +39,13 @@
 
 
     <ImageButton
-        android:id="@+id/user_friend_btn"
+        android:id="@+id/user_report_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="225dp"
         android:layout_marginBottom="44dp"
         android:background="@drawable/circle"
-        android:src="@drawable/add_person_icon"
+        android:src="@drawable/report_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

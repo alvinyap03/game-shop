@@ -106,4 +106,26 @@ public class Genre_dbManager extends SQLiteOpenHelper {
         database.close();
         return genre;
     }
+
+    public boolean isGenreExists(String username) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        String[] columns = new String[]{_ID, GENRE_NAME};
+
+        Cursor cursor = database.query(
+                TABLE_NAME,
+                columns,
+                GENRE_NAME + " = ?",
+                new String[]{username},
+                null,
+                null,
+                null
+        );
+
+        boolean exists = cursor != null && cursor.moveToFirst();
+        if (cursor != null) {
+            cursor.close();
+        }
+        database.close();
+        return exists;
+    }
 }
