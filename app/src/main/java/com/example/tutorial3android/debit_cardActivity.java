@@ -46,20 +46,14 @@ public class debit_cardActivity extends AppCompatActivity {
         debit_success.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Update UserData
-                UserData userData = getUserData(username);
-                if (userData != null) {
-                    // Ensure the games list is initialized to avoid null pointer exceptions
-                    if (userData.getGames() == null) {
-                        userData.setGames(new ArrayList<>());
-                    }
-                    List<game_data> gameDataList = convertToGameData(selectedGameNames);
-                    userData.getGames().addAll(gameDataList);
-                    updateUserData(userData);
-
-                    // Log the updated UserData
-                    Log.d(TAG, "Updated UserData: " + userData.toString());
+                // Create user-game associations and store them
+                // Create user-game associations and store them
+                UserGameDAO userGameDAO = new UserGameDAO(debit_cardActivity.this);
+                for (String gameName : selectedGameNames) {
+                    userGameDAO.addUserGameAssociation(username, gameName);
                 }
+                userGameDAO.closeDatabase();
+
 
                 // Create NotificationData
                 List<String> receivers = new ArrayList<>();
