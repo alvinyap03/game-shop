@@ -18,8 +18,7 @@ public class delete_genre_Activity extends AppCompatActivity {
 
     private Button backButton, adminPageButton;
     private ListView listView;
-    private GenreHelper genreHelper;
-    private GenreManager genreManager;
+    private Genre_dbManager genreDbManager;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -31,8 +30,7 @@ public class delete_genre_Activity extends AppCompatActivity {
         adminPageButton = findViewById(R.id.button14);
         listView = findViewById(R.id.listview31);
 
-        genreHelper = new GenreHelper(this);
-        genreManager = new GenreManager(this);
+        genreDbManager = new Genre_dbManager(this);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,14 +64,13 @@ public class delete_genre_Activity extends AppCompatActivity {
     }
 
     private void loadGenres() {
-        genreManager.open();
-        Cursor cursor = genreManager.getAllGenres();
+        Cursor cursor = genreDbManager.fetch();
 
         List<String> genreNames = new ArrayList<>();
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(cursor.getColumnIndex(GenreHelper.COLUMN_GENRE_NAME));
+                String name = cursor.getString(cursor.getColumnIndex(GENRE_NAME));
                 genreNames.add(name);
             } while (cursor.moveToNext());
         }
@@ -82,7 +79,7 @@ public class delete_genre_Activity extends AppCompatActivity {
             cursor.close();
         }
 
-        genreManager.close();
+        genreDbManager.close();
 
         // Create and set the adapter
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, genreNames);
@@ -90,10 +87,9 @@ public class delete_genre_Activity extends AppCompatActivity {
     }
 
     private void deleteGenre(String genreName) {
-        genreManager.open();
 
         // Implement the deletion logic here using genreManager
-        boolean isDeleted = genreManager.deleteGenreByName(genreName);
+        boolean isDeleted = genreDbManager.delete(genreName);
 
         if (isDeleted) {
             // If deletion is successful, show a message
@@ -103,7 +99,7 @@ public class delete_genre_Activity extends AppCompatActivity {
             genreHelper.showToast("Failed to delete genre.");
         }
 
-        genreManager.close();
+        genreDbManager.close();
 
         // Refresh the ListView to reflect changes
         loadGenres();

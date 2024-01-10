@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class buygameActivity extends AppCompatActivity {
 
@@ -28,46 +29,48 @@ public class buygameActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.csgo_fps2);
         Button buyButton = findViewById(R.id.buygame);
 
-        final game_data[] selectedGameData = {null}; // Use an array to hold the reference
-
         // Retrieve selected game data from the intent
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("selectedGameData")) {
-            selectedGameData[0] = (game_data) intent.getSerializableExtra("selectedGameData");
+        game_data selectedGameData = (game_data) getIntent().getSerializableExtra("selectedGameData");
 
-            if (selectedGameData[0] != null) {
-                Log.d(TAG, "onCreate: Selected Game Data - Name: " + selectedGameData[0].getName()
-                        + ", Price: " + selectedGameData[0].getPrice()
-                        + ", Description: " + selectedGameData[0].getDescription());
+        if (selectedGameData != null) {
+            Log.d(TAG, "onCreate: Selected Game Data - Name: " + selectedGameData.getName()
+                    + ", Price: " + selectedGameData.getPrice()
+                    + ", Description: " + selectedGameData.getDescription());
 
-                // Display game information
-                gameTitleTextView.setText(selectedGameData[0].getName());
-                priceTextView.setText(String.valueOf(selectedGameData[0].getPrice()));
-                descriptionTextView.setText(selectedGameData[0].getDescription());
+            // Display game information
+            gameTitleTextView.setText(selectedGameData.getName());
+            priceTextView.setText(String.valueOf(selectedGameData.getPrice()));
+            descriptionTextView.setText(selectedGameData.getDescription());
+
+            // Check if the user owns the game and update the button accordingly
+            if (userOwnsGame(selectedGameData.getName())) {
+                buyButton.setText("Play");
+                // Add onClickListener for playing the game
+                buyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Add logic to start playing the game
+                        // For example, you can start a new activity or perform the necessary actions
+                    }
+                });
             } else {
-                Log.e(TAG, "onCreate: Selected Game Data is null");
+                // User doesn't own the game, set "Buy" button behavior
+                buyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Start MainActivity with the intent and pass the selected game's data
+                        Intent mainIntent = new Intent(buygameActivity.this, MainActivity.class);
+                        mainIntent.putExtra("selectedGameData", (Serializable) selectedGameData);
+                        startActivity(mainIntent);
+
+                        // You can choose whether to finish buygameActivity here or not
+                        // finish();
+                    }
+                });
             }
         } else {
-            Log.e(TAG, "onCreate: Intent or selectedGameData is null");
+            Log.e(TAG, "onCreate: Selected Game Data is null");
         }
-
-        buyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedGameData[0] != null) {
-                    // Start MainActivity with the intent and pass the selected game's data
-                    Intent mainIntent = new Intent(buygameActivity.this, MainActivity.class);
-                    mainIntent.putExtra("selectedGameData", (Serializable) selectedGameData[0]);
-                    startActivity(mainIntent);
-
-                    // You can choose whether to finish buygameActivity here or not
-                    // finish();
-                } else {
-                    // Handle the case where selectedGameData is not initialized
-                    Log.e(TAG, "onClick: selectedGameData is not initialized");
-                }
-            }
-        });
 
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,5 +87,19 @@ public class buygameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Method to check if the user owns the game
+    private boolean userOwnsGame(String gameName) {
+        String username = getCurrentUsername(); // Implement this method to get the current username
+        List<String> userGames = UserGameAssociationManager.getInstance().getGamesForUser(username);
+        return userGames.contains(gameName);
+    }
+
+    // Implement this method to get the current username
+    private String getCurrentUsername() {
+        // You need to implement a way to get the current username (e.g., from shared preferences, database, etc.)
+        // For now, let's assume it's stored in SharedPreferences
+        return getSharedPreferences("user_info", MODE_PRIVATE).getString("username", "");
     }
 }

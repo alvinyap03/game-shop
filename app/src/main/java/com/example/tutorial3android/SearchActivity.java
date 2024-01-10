@@ -23,11 +23,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        GenreManager genreManager = new GenreManager(this);
-        genreManager.open();
+        Genre_dbManager genreDbManager = new Genre_dbManager(this);
+        genreDbManager.open();
 
         // Fetch genres from the database
-        List<GenreData> genreList = genreManager.getAllGenresList();
+        List<GenreData> genreList = genreDbManager.getAllGenresList();
 
         // Log the data to verify
         for (GenreData genre : genreList) {

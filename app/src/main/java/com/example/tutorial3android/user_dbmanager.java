@@ -17,7 +17,6 @@ public class user_dbmanager extends SQLiteOpenHelper {
     public static final String _ID = "_id";
     public static final String Gmail = "gmail";
     public static final String Username = "username";
-
     public static final String Password = "password";
 
 
