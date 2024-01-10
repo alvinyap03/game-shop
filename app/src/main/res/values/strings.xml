@@ -14,4 +14,18 @@
     <string name="username">Username</string>
     <string name="register">Register</string>
     <string name="comfirm_password">Comfirm Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_game">Create Game</string>
+    <string name="create_genre">Create Genre</string>
+    <string name="add_activty">add activty</string>
+    <string name="add">add</string>
+    <string name="back">back</string>
+    <string name="view">view</string>
+    <string name="upload_genre">Upload genre</string>
+    <string name="genre">Genre</string>
+    <string name="enter_genre">Enter Genre</string>
+    <string name="genre_list">Genre List</string>
+    <string name="_1">1</string>
+    <string name="game_list">Game List</string>
 </resources>

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Tutorial3Android"
         tools:targetApi="31">
         <activity
+            android:name=".game_list"
+            android:exported="false" />
+        <activity
+            android:name=".Genre_List"
+            android:exported="false" />
+        <activity
             android:name=".playgamelistActivity"
             android:exported="false" />
         <activity

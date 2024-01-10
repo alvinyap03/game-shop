@@ -20,7 +20,7 @@ public class pick_genreActivity extends AppCompatActivity {
 
     private ListView genreListView;
     private Button backButton, nextButton;
-    private GenreManager genreManager;
+    private Genre_dbManager genreDbManager;
     private List<GenreData> genreDataList;
     private GenreDataAdapter adapter;
     private Set<GenreData> selectedGenres = new HashSet<>(); // to keep track of selected genres
@@ -37,8 +37,8 @@ public class pick_genreActivity extends AppCompatActivity {
         backButton = findViewById(R.id.button7);
         nextButton = findViewById(R.id.button8);
 
-        genreManager = new GenreManager(this);
-        genreManager.open();
+        genreDbManager = new Genre_dbManager(this);
+        genreDbManager.open();
 
         Intent intent = getIntent();
         gameName = intent.getStringExtra("gameName");
@@ -53,13 +53,13 @@ public class pick_genreActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if (genreManager != null) {
-            genreManager.close();
+        if (genreDbManager != null) {
+            genreDbManager.close();
         }
     }
 
     private void initializeViews() {
-        genreDataList = genreManager.getAllGenresList();
+        genreDataList = genreDbManager.getAllGenresList();
 
         for (GenreData genre : genreDataList) {
             if (genre != null) {
@@ -130,7 +130,7 @@ public class pick_genreActivity extends AppCompatActivity {
                             convertGenreSetToList(selectedGenres));
 
             // Save the game information and selected genres to SQLite
-            long gameId = new GameManager(pick_genreActivity.this).insertGame(gameData);
+            long gameId = new Game_dbManager(pick_genreActivity.this).insertGame(gameData);
 
             if (gameId != -1) {
                 // Successfully inserted, navigate to adminpage
