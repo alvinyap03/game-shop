@@ -1,6 +1,7 @@
 package com.example.tutorial3android;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tutorial3android.data.Game;
 import com.example.tutorial3android.manager.GameManager;
+import com.example.tutorial3android.manager.UserGameManager;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class buygameActivity extends AppCompatActivity {
 
@@ -31,6 +34,9 @@ public class buygameActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.csgo_fps2);
         Button buyButton = findViewById(R.id.buygame);
 
+        SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        String username = preferences.getString("username", "");
+
         // Retrieve the game name from the intent
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("selectedGameName")) {
@@ -45,6 +51,18 @@ public class buygameActivity extends AppCompatActivity {
                 gameTitleTextView.setText(selectedGame.getGameName());
                 priceTextView.setText(String.valueOf(selectedGame.getPrice()));
                 descriptionTextView.setText(selectedGame.getDescription());
+
+                // Check if the user already has the game
+                UserGameManager userGameManager = new UserGameManager(buygameActivity.this);
+                List<String> userGames = userGameManager.getGamesForUser(username);
+
+                if (userGames.contains(selectedGameName)) {
+                    // User has the game, change button to "Play"
+                    buyButton.setText("Play");
+
+                    // Handle "Play" action, e.g., start the game
+                    // Add your custom logic here
+                }
             } else {
                 Log.e(TAG, "onCreate: Selected Game is null");
             }
@@ -55,15 +73,14 @@ public class buygameActivity extends AppCompatActivity {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve the displayed game name and price
                 String displayedGameName = gameTitleTextView.getText().toString();
                 double displayedGamePrice = Double.parseDouble(priceTextView.getText().toString());
 
-                // Pass the displayed game data to MainActivity
-                Intent mainIntent = new Intent(buygameActivity.this, MainActivity.class);
-                mainIntent.putExtra("selectedGameName", displayedGameName);
-                mainIntent.putExtra("selectedGamePrice", displayedGamePrice);
-                startActivity(mainIntent);
+                    // User doesn't have the game, handle "Buy" action
+                    Intent mainIntent = new Intent(buygameActivity.this, MainActivity.class);
+                    mainIntent.putExtra("selectedGameName", displayedGameName);
+                    mainIntent.putExtra("selectedGamePrice", displayedGamePrice);
+                    startActivity(mainIntent);
             }
         });
 

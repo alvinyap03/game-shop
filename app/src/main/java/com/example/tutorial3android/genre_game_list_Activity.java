@@ -29,20 +29,20 @@ public class genre_game_list_Activity extends AppCompatActivity {
         recyclerView = findViewById(R.id.notification1);
 
         Intent intent = getIntent();
-        if (intent.hasExtra("selectedGenre")) {
-            String selectedGenreName = intent.getStringExtra("selectedGenre");
-            Log.d("Debug", "Selected Genre: " + selectedGenreName);
-            genreNameTextView.setText("Games for Genre: " + selectedGenreName);
 
-            // Retrieve game names related to the selected genre from the database
-            List<String> relatedGameNames = getRelatedGameNames(selectedGenreName);
+        String selectedGenreName = intent.getStringExtra("selectedGenreName");
+        Log.d("Debug", "Selected Genre: " + selectedGenreName);
+        genreNameTextView.setText(selectedGenreName);
 
-            // Log the size of the relatedGameNames list
-            Log.d("Debug", "Related GameNames Size: " + relatedGameNames.size());
+        // Retrieve game names related to the selected genre from the database
+        List<String> relatedGameNames = getRelatedGameNames(selectedGenreName);
 
-            // Set up the RecyclerView with the list of related game names
-            setupRecyclerView(relatedGameNames);
-        }
+        // Log the size of the relatedGameNames list
+        Log.d("Debug", "Related GameNames Size: " + relatedGameNames.size());
+
+        // Set up the RecyclerView with the list of related game names
+        setupRecyclerView(relatedGameNames);
+
 
         Button backButton = findViewById(R.id.button22);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +52,7 @@ public class genre_game_list_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     private List<String> getRelatedGameNames(String selectedGenreName) {
@@ -61,27 +62,23 @@ public class genre_game_list_Activity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(List<String> gameNames) {
-        // Initialize the RecyclerView and set up the adapter
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        gameListAdapter = new GameListAdapter(gameNames);
+        if (gameNames != null && !gameNames.isEmpty()) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            gameListAdapter = new GameListAdapter(gameNames);
 
-        // Set the item click listener
-        gameListAdapter.setOnItemClickListener(new GameListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                // Handle item click, for example, start buygameActivity
-                String selectedGameName = gameNames.get(position);
-                if (selectedGameName != null) {
-                    // Implement the logic to start buygameActivity or perform any action
+            // Set the item click listener for the adapter
+            gameListAdapter.setOnItemClickListener(new GameListAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    String selectedGameName = gameNames.get(position);
                     startBuyGameActivity(selectedGameName);
-                } else {
-                    // Handle the case where the selectedGameName is null
-                    // Log an error or show a message
                 }
-            }
-        });
+            });
 
-        recyclerView.setAdapter(gameListAdapter);
+            recyclerView.setAdapter(gameListAdapter);
+        } else {
+            Log.d("Debug", "GameNames list is empty or null.");
+        }
     }
 
     private void startBuyGameActivity(String selectedGameName) {

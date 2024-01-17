@@ -40,6 +40,17 @@ public class PickGerne2DataAdapter extends ArrayAdapter<Genre> {
         TextView genreName = listItem.findViewById(R.id.messageTextView);
         genreName.setText(currentGenre.getGenreName());
 
+        // Declare listItem as final for use in the OnClickListener
+        final View finalListItem = listItem;
+
+        // Set a click listener for the genre item
+        listItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleGenreClick(currentGenre, finalListItem);
+            }
+        });
+
         // Check if the current genre is in the selected genres set
         if (selectedGenres.contains(currentGenre)) {
             // Change the background color to indicate selection
@@ -50,6 +61,22 @@ public class PickGerne2DataAdapter extends ArrayAdapter<Genre> {
         }
 
         return listItem;
+    }
+
+    private void handleGenreClick(Genre clickedGenre, View listItem) {
+        // Check if the clicked genre is already selected
+        if (selectedGenres.contains(clickedGenre)) {
+            // Deselect the genre
+            selectedGenres.remove(clickedGenre);
+            listItem.setBackgroundColor(Color.TRANSPARENT); // Change this to your default color
+        } else {
+            // Select the genre
+            selectedGenres.add(clickedGenre);
+            listItem.setBackgroundColor(ContextCompat.getColor(context, R.color.selected_color));
+        }
+
+        // Notify the adapter that the data has changed
+        notifyDataSetChanged();
     }
 
     public void updateData(Set<Genre> selectedGenres) {

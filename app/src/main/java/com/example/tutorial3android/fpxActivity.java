@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tutorial3android.data.Income;
+import com.example.tutorial3android.data.UserGame;
 import com.example.tutorial3android.manager.IncomeManager;
 import com.example.tutorial3android.manager.NotificationManager;
 import com.example.tutorial3android.data.Notification;
@@ -59,11 +60,13 @@ public class fpxActivity extends AppCompatActivity {
 
 
     private void handlePayment(List<String> selectedGameNames, double totalPrice, String username) {
-        // Create user-game associations and store them
         UserGameManager userGameManager = new UserGameManager(fpxActivity.this);
+
         for (String gameName : selectedGameNames) {
-            userGameManager.addUserGameAssociation(username, gameName);
+            UserGame userGame = new UserGame(username, gameName);
+            userGameManager.insertUserGame(userGame);
         }
+
         userGameManager.closeDatabase();
 
         // Concatenate the game names into a single string
@@ -76,7 +79,7 @@ public class fpxActivity extends AppCompatActivity {
         }
 
         // Create NotificationData
-        String receiver = username + " ";  // Concatenate the username
+        String receiver = username;  // Concatenate the username
         Notification notificationData = new Notification(
                 "system",
                 boughtGamesMessage.toString(),

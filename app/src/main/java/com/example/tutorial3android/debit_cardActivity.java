@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tutorial3android.data.Income;
+import com.example.tutorial3android.data.UserGame;
 import com.example.tutorial3android.manager.IncomeManager;
 import com.example.tutorial3android.manager.UserGameManager;
 import com.example.tutorial3android.manager.NotificationManager;
@@ -63,11 +64,13 @@ public class debit_cardActivity extends AppCompatActivity {
     }
 
     private void handlePayment(List<String> selectedGameNames, double totalPrice, String username) {
-        // Create user-game associations and store them
         UserGameManager userGameManager = new UserGameManager(debit_cardActivity.this);
+
         for (String gameName : selectedGameNames) {
-            userGameManager.addUserGameAssociation(username, gameName);
+            UserGame userGame = new UserGame(username, gameName);
+            userGameManager.insertUserGame(userGame);
         }
+
         userGameManager.closeDatabase();
 
         // Concatenate the game names into a single string
@@ -80,7 +83,7 @@ public class debit_cardActivity extends AppCompatActivity {
         }
 
         // Create NotificationData
-        String receiver = username + " ";  // Concatenate the username
+        String receiver = username;  // Concatenate the username
         Notification notificationData = new Notification(
                 "system",
                 boughtGamesMessage.toString(),
@@ -95,10 +98,16 @@ public class debit_cardActivity extends AppCompatActivity {
 
         // Create Income data
         IncomeManager incomeManager = new IncomeManager(debit_cardActivity.this);
-        incomeManager.insertIncome(new Income(username, totalPrice, null, String.valueOf(new Date().getTime())));  // Assuming you don't have a message for Income
+        String currentDate = String.valueOf(new Date().getTime());  // Declare and initialize currentDate
+        incomeManager.insertIncome(new Income(username, totalPrice, null, currentDate));  // Assuming you don't have a message for Income
 
         // Navigate to payment_successActivity
         Intent intent = new Intent(debit_cardActivity.this, payment_successActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("date", currentDate);
+        intent.putExtra("payment_method", "card");
+        intent.putExtra("total", totalPrice);
         startActivity(intent);
     }
+
 }

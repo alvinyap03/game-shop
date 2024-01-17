@@ -18,8 +18,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_INCOME_TABLE = "CREATE TABLE Income (income_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, total REAL, message TEXT, time TEXT);";
     private static final String CREATE_REPORT_TABLE = "CREATE TABLE Report (report_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, title TEXT, comment TEXT);";
 
+    private static SQLiteDatabase database; // Single instance of SQLiteDatabase
+
+    private static DatabaseHelper instance; // Single instance of DatabaseHelper
+
+    // Make the constructor public
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static synchronized DatabaseHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new DatabaseHelper(context.getApplicationContext());
+            database = instance.getWritableDatabase();
+        }
+        return instance;
+    }
+
+    public SQLiteDatabase getDatabase() {
+        return database;
     }
 
     @Override

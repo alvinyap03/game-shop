@@ -12,6 +12,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tutorial3android.helper.DatabaseHelper;
+import com.example.tutorial3android.manager.GameGenreManager;
 import com.example.tutorial3android.manager.GenreManager;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class delete_genre_Activity extends AppCompatActivity {
     private ListView listView;
     private DatabaseHelper dbHelper;
     private GenreManager genreManager;
+    private GameGenreManager gameGenreManager;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -36,6 +38,7 @@ public class delete_genre_Activity extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
         genreManager = new GenreManager(this);
+        gameGenreManager = new GameGenreManager(this);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +111,21 @@ public class delete_genre_Activity extends AppCompatActivity {
         genreManager.open();
 
         // Implement the deletion logic here using genreManager
-        boolean isDeleted = genreManager.deleteGenreByName(genreName);
+        boolean isGenreDeleted  = genreManager.deleteGenreByName(genreName);
 
         genreManager.close();
 
+        // If the genre is successfully deleted, also delete associated games
+        if (isGenreDeleted) {
+            deleteGamesByGenre(genreName);
+        }
+
         // Refresh the ListView to reflect changes
         loadGenres();
+    }
+
+    private void deleteGamesByGenre(String genreName) {
+        // Use your GameGenreManager to delete games by genre
+        gameGenreManager.deleteGamesByGenre(genreName);
     }
 }

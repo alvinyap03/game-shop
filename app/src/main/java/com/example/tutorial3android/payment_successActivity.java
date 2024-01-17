@@ -14,6 +14,7 @@ public class payment_successActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_success);
 
+        Intent originalIntent = getIntent();
 
         Button payment_success_menu = findViewById(R.id.payment_success_menu);
         payment_success_menu.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +31,7 @@ public class payment_successActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(payment_successActivity.this, recieptActivity.class);
+                intent.putExtras(originalIntent);
                 startActivity(intent);
             }
         });

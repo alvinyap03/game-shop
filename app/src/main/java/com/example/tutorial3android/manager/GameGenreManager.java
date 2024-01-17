@@ -65,9 +65,9 @@ public class GameGenreManager {
         return gameNames;
     }
 
-    public String getGenreByGameName(String gameName) {
+    public List<String> getGenreByGameName(String gameName) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String genreName = null;
+        List<String> genreNames = new ArrayList<>();
 
         try (Cursor cursor = db.query(
                 "GameGenre",
@@ -78,14 +78,15 @@ public class GameGenreManager {
                 null,
                 null
         )) {
-            if (cursor.moveToFirst()) {
-                genreName = cursor.getString(cursor.getColumnIndex("genre_name"));
+            while (cursor.moveToNext()) {
+                String genreName = cursor.getString(cursor.getColumnIndex("genre_name"));
+                genreNames.add(genreName);
             }
         } finally {
             db.close();
         }
 
-        return genreName;
+        return genreNames;
     }
 
     public int deleteGenresByGameName(String gameName) {
@@ -93,6 +94,20 @@ public class GameGenreManager {
 
         try {
             return db.delete("GameGenre", "game_name = ?", new String[]{gameName});
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the error for debugging
+            // Handle the error as needed, such as showing a toast or returning a specific error code
+            return -1;
+        } finally {
+            db.close();
+        }
+    }
+
+    public int deleteGamesByGenre(String genreName) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try {
+            return db.delete("GameGenre", "genre_name = ?", new String[]{genreName});
         } catch (Exception e) {
             e.printStackTrace(); // Log the error for debugging
             // Handle the error as needed, such as showing a toast or returning a specific error code

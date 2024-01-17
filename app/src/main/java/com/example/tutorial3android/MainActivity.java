@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tutorial3android.data.Game;
+import com.example.tutorial3android.manager.UserGameManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.buywhatgame);
 
+        SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        String username = preferences.getString("username", "");
+
         adapter = new GameNamePriceAdapter(selectedGamesList, new GameNamePriceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -51,7 +55,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        Button fpx = findViewById(R.id.fpx);
+        Button next = findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, choose_payment_Activity.class);
+                intent.putExtra("selectedGameNames", getSelectedGameNames());
+                intent.putExtra("totalPrice", calculateTotalPrice());
+                startActivity(intent);
+            }
+        });
+
+        /*Button fpx = findViewById(R.id.fpx);
         fpx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("totalPrice", calculateTotalPrice());
                 startActivity(intent);
             }
-        });
+        });*/
 
         Button payment_menu = findViewById(R.id.payment_menu);
         payment_menu.setOnClickListener(new View.OnClickListener() {
@@ -150,10 +165,32 @@ public class MainActivity extends AppCompatActivity {
         String savedGamesJson = sharedPreferences.getString(KEY_SELECTED_GAMES, "");
         if (!savedGamesJson.isEmpty()) {
             List<Game> savedGamesList = convertJsonToGameList(savedGamesJson);
-            selectedGamesList.addAll(savedGamesList);
+
+            // Get the username from SharedPreferences
+            SharedPreferences preferences = getSharedPreferences("user_info", MODE_PRIVATE);
+            String username = preferences.getString("username", "");
+
+            // Filter out games related to the current username
+            List<Game> filteredGamesList = new ArrayList<>();
+            for (Game game : savedGamesList) {
+                // Check if the game is not associated with the current username
+                if (!isGameAssociatedWithUser(game.getGameName(), username)) {
+                    filteredGamesList.add(game);
+                }
+            }
+
+            // Update the selectedGamesList and RecyclerView
+            selectedGamesList.addAll(filteredGamesList);
             updateRecyclerView();
         }
     }
+
+    private boolean isGameAssociatedWithUser(String gameName, String username) {
+        UserGameManager userGameManager = new UserGameManager(MainActivity.this);
+        List<String> userGames = userGameManager.getGamesForUser(username);
+        return userGames.contains(gameName);
+    }
+
 
     private void updateSharedPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
@@ -204,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
     private void deleteSelectedGame(int position) {
         if (position >= 0 && position < selectedGamesList.size()) {
             selectedGamesList.remove(position);
-            updateRecyclerView();
+            adapter.removeItem(position);
+            updateTotalPriceTextView();
             updateSharedPreferences();
         }
     }
@@ -216,6 +254,10 @@ public class MainActivity extends AppCompatActivity {
             updateRecyclerView();
             updateTotalPriceTextView();
             updateSharedPreferences();
+        } else {
+            // Handle the case where the game is already in the list
+            Log.d(TAG, "addSelectedGameToRecyclerView: Game already added - " + selectedGameName);
+            // You may show a toast message or handle it in another way
         }
     }
 

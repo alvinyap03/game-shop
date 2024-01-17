@@ -61,11 +61,18 @@ public class NotificationManager {
                     null,
                     null
             )) {
+                Log.d("NotificationManager", "Cursor count: " + cursor.getCount());
+
                 while (cursor.moveToNext()) {
                     String sender = cursor.getString(cursor.getColumnIndexOrThrow("sender"));
                     String message = cursor.getString(cursor.getColumnIndexOrThrow("message"));
                     String receiver = cursor.getString(cursor.getColumnIndexOrThrow("receiver"));
                     String time = cursor.getString(cursor.getColumnIndexOrThrow("time"));
+
+                    Log.d("NotificationManager", "Notification - Sender: " + sender
+                            + ", Message: " + message
+                            + ", Receiver: " + receiver
+                            + ", Time: " + time);
 
                     Notification notification = new Notification(sender, message, receiver, time);
                     notifications.add(notification);
@@ -75,8 +82,10 @@ public class NotificationManager {
             Log.e("NotificationManager", "Error getting notifications: " + e.getMessage());
         }
 
+        Log.d("NotificationManager", "Notifications size: " + notifications.size());
         return notifications;
     }
+
 
     public void closeDatabase() {
         dbHelper.close();

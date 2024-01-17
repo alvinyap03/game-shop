@@ -3,7 +3,9 @@ package com.example.tutorial3android.manager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.tutorial3android.data.UserGame;
 import com.example.tutorial3android.helper.DatabaseHelper;
@@ -25,19 +27,18 @@ public class UserGameManager {
         values.put("username", userGame.getUsername());
         values.put("game_name", userGame.getGameName());
 
-        long newRowId = db.insert("UserGame", null, values);
-        db.close();
+        long newRowId = -1;
+
+        try {
+            newRowId = db.insertWithOnConflict("UserGame", null, values, SQLiteDatabase.CONFLICT_IGNORE);
+        } catch (SQLiteConstraintException e) {
+            // Handle the unique constraint violation, e.g., log the error
+            Log.e("UserGameManager", "Error inserting user game: " + e.getMessage());
+        } finally {
+            db.close();
+        }
+
         return newRowId;
-    }
-
-    public void addUserGameAssociation(String username, String gameName) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("username", username);
-        values.put("game_name", gameName);
-
-        db.insert("user_game_associations", null, values);
-        db.close();
     }
 
     public List<String> getGamesForUser(String username) {
@@ -49,7 +50,7 @@ public class UserGameManager {
         String[] selectionArgs = {username};
 
         Cursor cursor = db.query(
-                "user_game_associations",
+                "UserGame",  // Use the correct table name here
                 projection,
                 selection,
                 selectionArgs,
@@ -67,6 +68,7 @@ public class UserGameManager {
         db.close();
         return userGames;
     }
+
 
     public void closeDatabase() {
         // Implement database closing logic

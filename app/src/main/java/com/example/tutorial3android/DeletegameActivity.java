@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tutorial3android.manager.GameGenreManager;
 import com.example.tutorial3android.manager.GameManager;
 import com.example.tutorial3android.data.Game;
 
@@ -18,6 +19,7 @@ public class DeletegameActivity extends AppCompatActivity {
 
     private EditText gameNameEditText, gamepriceEditText, gamedescriptionEditText;
     private GameManager gameManager;
+    private GameGenreManager gameGenreManager;
     private Button backButton, deleteButton, editButton;
 
     @Override
@@ -33,6 +35,7 @@ public class DeletegameActivity extends AppCompatActivity {
         gamepriceEditText = findViewById(R.id.price);
         gamedescriptionEditText = findViewById(R.id.description);
         gameManager = new GameManager(this);
+        gameGenreManager = new GameGenreManager(this);
 
         Intent intent = getIntent();
         String selectedGameName = intent.getStringExtra("selectedGameName");
@@ -48,13 +51,12 @@ public class DeletegameActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retrieve the game name from the EditText field
-                String gameName = gameNameEditText.getText().toString();
 
                 // Delete the game data from SQLite and related GameGenre data
-                boolean success = gameManager.deleteGameAndGenres(gameName);
+                boolean success = gameManager.deleteGame(selectedGameName);
 
                 if (success) {
+                    gameGenreManager.deleteGenresByGameName(selectedGameName);
                     // If deletion is successful, go back to game_editlist_Activity
                     Intent intent = new Intent(DeletegameActivity.this, game_editlist_Activity.class);
                     startActivity(intent);
@@ -103,10 +105,14 @@ public class DeletegameActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DeletegameActivity.this, game_editlist_Activity.class);
-                startActivity(intent);
-                finish();
+                navigateToGameEditListActivity();
             }
         });
+    }
+
+    private void navigateToGameEditListActivity() {
+        Intent intent = new Intent(DeletegameActivity.this, game_editlist_Activity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tutorial3android.data.Notification;
+import com.example.tutorial3android.manager.NotificationManager;
 
 import java.util.List;
 

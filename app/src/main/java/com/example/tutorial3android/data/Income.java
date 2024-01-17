@@ -1,5 +1,10 @@
 package com.example.tutorial3android.data;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Income {
     private int incomeId;
     private String username;
@@ -52,4 +57,16 @@ public class Income {
 
     public void setTime(String time) {
         this.time = time;
-    }}
+    }
+
+    public Date getTimeAsDate() {
+        // Assuming your time string is in a valid format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        try {
+            return dateFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace(); // Handle the parsing exception as needed
+            return null;
+        }
+    }
+}

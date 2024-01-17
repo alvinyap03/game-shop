@@ -35,10 +35,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Notification notification = notificationList.get(position);
 
         holder.messageTextView.setText(notification.getMessage());
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String formattedDate = dateFormat.format(new Date(Long.parseLong(notification.getTime())));
-        holder.dateTextView.setText(formattedDate); // Set the formatted date
+        holder.dateTextView.setText(notification.getTime()); // Set the raw time string
     }
 
     @Override

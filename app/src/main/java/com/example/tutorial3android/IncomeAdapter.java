@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tutorial3android.data.Income;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.text.SimpleDateFormat;
@@ -42,6 +43,14 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
         return incomeDataList.size();
     }
 
+    public double calculateTotal() {
+        double total = 0;
+        for (Income income : incomeDataList) {
+            total += income.getTotal();
+        }
+        return total;
+    }
+
     static class IncomeViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView amountTextView;
@@ -53,12 +62,15 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
             timeTextView = itemView.findViewById(R.id.dateTextView);
         }
 
-        public void bind(Income Income) {
-            amountTextView.setText(String.format(Locale.getDefault(), "$%.2f", Income.getTotal()));
+        public void bind(Income income) {
+            amountTextView.setText(String.format(Locale.getDefault(), "$%.2f", income.getTotal()));
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-            String formattedTime = dateFormat.format(Income.getTime());
-            timeTextView.setText(formattedTime);
+            Date timeAsDate = income.getTimeAsDate();
+            if (timeAsDate != null) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+                String formattedTime = dateFormat.format(timeAsDate);
+                timeTextView.setText(formattedTime);
+            }
         }
     }
 }

@@ -34,6 +34,15 @@ public class usermenuActivity extends AppCompatActivity {
             }
         });
 
+        Button searchuser = findViewById(R.id.usermenu_search2);
+        searchuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(usermenuActivity.this, usergameActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button notification = findViewById(R.id.notification);
         notification.setOnClickListener(new View.OnClickListener() {
             @Override

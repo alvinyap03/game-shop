@@ -102,4 +102,12 @@ public class GameNamePriceAdapter extends RecyclerView.Adapter<GameNamePriceAdap
             deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
+
+    public void removeItem(int position) {
+        if (position >= 0 && position < gameList.size()) {
+            gameList.remove(position);
+            notifyItemRemoved(position);
+            notifyDataSetChanged(); // This line ensures proper update
+        }
+    }
 }

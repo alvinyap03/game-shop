@@ -33,25 +33,14 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
         notifyDataSetChanged();
     }
 
+
+
     @NonNull
     @Override
     public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_genre_layout, parent, false);
         return new GameViewHolder(itemView);
-    }
-
-    public void handleItemClick(int position) {
-        String selectedGameName = gameNames.get(position);
-        if (!TextUtils.isEmpty(selectedGameName)) {
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(position);
-            }
-        } else {
-            // Handle the case where the game name is empty or null, e.g., show an error message
-            Log.e(TAG, "handleItemClick: Invalid game name at position " + position);
-            // You might want to show an error message to the user
-        }
     }
 
     @Override
@@ -130,4 +119,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameVi
         // Implement the logic to start DeletegameActivity
         // ...
     }
+
+
 }

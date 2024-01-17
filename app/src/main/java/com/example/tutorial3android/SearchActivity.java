@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.tutorial3android.manager.GenreManager;
 import com.example.tutorial3android.data.Genre;
 
@@ -58,23 +61,12 @@ public class SearchActivity extends AppCompatActivity {
         Log.d("SearchActivity", "GenreList size: " + genreList.size());
         Log.d("SearchActivity", "GenreList contents: " + genreList);
 
-        // Create an adapter and connect it to the ListView
+        // Create an adapter and connect it to the RecyclerView
         ClickGenreAdapter adapter = new ClickGenreAdapter(this, genreList);
-        ListView listView = findViewById(R.id.listview5); // Replace with your actual ListView id
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = findViewById(R.id.genrerecycleview);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedGenreName = genreList.get(position).getGenreName();
-                // Log the selected genre name
-                Log.d("SearchActivity", "Selected Genre: " + selectedGenreName);
-                // Start genre_game_list_Activity and pass the selected genre name
-                Intent intent = new Intent(SearchActivity.this, genre_game_list_Activity.class);
-                intent.putExtra("selectedGenreName", selectedGenreName);
-                startActivity(intent);
-            }
-        });
 
         Button search_menu = findViewById(R.id.search_menu);
         search_menu.setOnClickListener(new View.OnClickListener() {

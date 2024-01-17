@@ -18,7 +18,6 @@ import com.example.tutorial3android.data.Genre;
 import com.example.tutorial3android.manager.GameManager;
 import com.example.tutorial3android.manager.GameGenreManager;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +45,7 @@ public class pick_genreActivity extends AppCompatActivity {
 
         genreListView = findViewById(R.id.listViewGenre119);
         backButton = findViewById(R.id.button7);
-        nextButton = findViewById(R.id.button8);
+        nextButton = findViewById(R.id.button200);
 
         Intent intent = getIntent();
         gameName = intent.getStringExtra("gameName");
