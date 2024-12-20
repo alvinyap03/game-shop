@@ -15,9 +15,10 @@
             android:id="@+id/button50"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:text="add game"
+            android:layout_marginTop="360dp"
+            android:text="@string/add_game"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,20 +26,22 @@
             android:id="@+id/button2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
-            android:text="edit game"
+            android:layout_marginTop="360dp"
+            android:text="@string/edit_game111"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="200dp"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="back"
+            android:layout_marginBottom="24dp"
+            android:text="BACK"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -46,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="edit game"
-            android:textSize="25dp"
+            android:text="CHOOSE SERVICES"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

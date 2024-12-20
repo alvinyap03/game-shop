@@ -4,101 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/profilebkg"
     tools:context=".debit_cardActivity">
 
     <TextView
         android:id="@+id/total4"
-        android:layout_width="80dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
-        android:layout_marginEnd="120dp"
-        android:textSize="25dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="12dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/debit_success"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="70dp"
-        android:text="buy"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="28dp"
+        android:text="BUY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/debit_back"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="70dp"
-        android:text="back"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="88dp"
+        android:text="BACK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="debit card"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textView33"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="125dp"
-        android:text="total :"
-        android:textSize="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="156dp"
+        android:text="TOTAL:"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView35"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="200dp"
-        android:text="card number"
-        android:textSize="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="212dp"
+        android:text="CARD NUMBER"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView36"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="300dp"
-        android:text="expiration date"
-        android:textSize="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="332dp"
+        android:text="EXPIRATION DATE"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView37"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="450dp"
-        android:text="security code"
-        android:textSize="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="476dp"
+        android:text="SECURE CODE"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextText4"
-        android:layout_width="175dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/enter_card_number"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,11 +100,13 @@
         android:id="@+id/editTextText5"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="220dp"
         android:ems="10"
+        android:hint="@string/mm"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:text="MM"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -118,23 +114,39 @@
         android:id="@+id/editTextText6"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
+        android:hint="@string/yy"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:text="YY"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextText7"
-        android:layout_width="175dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="524dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/enter_security_code"
+        android:importantForAutofill="no"
         android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="225dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/visa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

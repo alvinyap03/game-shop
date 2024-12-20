@@ -94,10 +94,15 @@ public class tngActivity extends AppCompatActivity {
 
         // Create Income data
         IncomeManager incomeManager = new IncomeManager(tngActivity.this);
-        incomeManager.insertIncome(new Income(username, totalPrice, null, String.valueOf(new Date().getTime())));  // Assuming you don't have a message for Income
+        String currentDate = String.valueOf(new Date().getTime());  // Declare and initialize currentDate
+        incomeManager.insertIncome(new Income(username, totalPrice, null, currentDate));  // Assuming you don't have a message for Income
 
         // Navigate to payment_successActivity
         Intent intent = new Intent(tngActivity.this, payment_successActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("date", currentDate);
+        intent.putExtra("payment_method", "touch and go");
+        intent.putExtra("total", totalPrice);
         startActivity(intent);
     }
 }

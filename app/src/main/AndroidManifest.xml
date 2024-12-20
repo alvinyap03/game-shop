@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Tutorial3Android"
         tools:targetApi="31">
         <activity
+            android:name=".updatepassActivity"
+            android:exported="false" />
+        <activity
             android:name=".usergamelistActivity"
             android:exported="false" />
         <activity
@@ -55,9 +58,6 @@
             android:name=".pick_genreActivity"
             android:exported="false" />
         <activity
-            android:name=".gamelist"
-            android:exported="false" />
-        <activity
             android:name=".buygameActivity"
             android:exported="false" />
         <activity
@@ -71,9 +71,6 @@
             android:exported="false" />
         <activity
             android:name=".usermenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".communityActivity"
             android:exported="false" />
         <activity
             android:name=".recieptActivity"
@@ -97,54 +94,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.login.login"
-            android:exported="true"
-            android:label="@string/title_activity_login" /> <!-- Add other activities as needed -->
+            android:name=".choose_payment_Activity"
+            android:exported="true" />
         <activity
             android:name=".SearchActivity"
             android:exported="true" />
         <activity
-            android:name=".fpsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".advActivity"
-            android:exported="true" />
-        <activity
-            android:name=".rpgActivity"
-            android:exported="true" />
-        <activity
             android:name=".delete_genre_Activity"
             android:exported="false" />
-        <activity
-            android:name=".rtsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".simActivity"
-            android:exported="true" />
-        <activity
-            android:name=".sandboxActivity"
-            android:exported="true" />
-        <activity
-            android:name=".minecraftActivity"
-            android:exported="true" />
-        <activity
-            android:name=".csgoActivity"
-            android:exported="true" />
-        <activity
-            android:name=".elden_ringActivity"
-            android:exported="true" />
-        <activity
-            android:name=".starcraft2Activity"
-            android:exported="true" />
-        <activity
-            android:name=".stardew_valleyActivity"
-            android:exported="true" />
-        <activity
-            android:name=".strayActivity"
-            android:exported="true" />
-        <activity
-            android:name=".valorantActivity"
-            android:exported="true" />
         <activity
             android:name=".debit_cardActivity"
             android:exported="true" />

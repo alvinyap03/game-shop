@@ -57,5 +57,14 @@ public class profileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button password = findViewById(R.id.button32);
+        password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(profileActivity.this, updatepassActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

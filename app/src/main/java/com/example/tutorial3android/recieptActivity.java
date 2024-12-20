@@ -2,6 +2,8 @@ package com.example.tutorial3android;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,14 +35,25 @@ public class recieptActivity extends AppCompatActivity {
         TextView usernameTextView = findViewById(R.id.usernamer);
         usernameTextView.setText(username);
 
-        TextView dateTextView = findViewById(R.id.dater);
-        dateTextView.setText(formattedDate);
+        // TextView dateTextView = findViewById(R.id.dater);
+        // dateTextView.setText(formattedDate);
 
         TextView methodTextView = findViewById(R.id.methodr);
         methodTextView.setText(paymentMethod);
 
         TextView totalTextView = findViewById(R.id.totalr);
         totalTextView.setText(String.format("%.2f", total));
+
+
+        Button mainmenu = findViewById(R.id.reciept_menu);
+        mainmenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(recieptActivity.this, usermenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private String formatDate(String dateString) {

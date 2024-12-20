@@ -4,69 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/profilebkg"
     tools:context=".loginActivity">
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="@string/log_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/register_turn_page_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="376dp"
+        android:layout_width="380dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="556dp"
         android:minWidth="100dp"
         android:minHeight="48dp"
         android:text="@string/register"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="150dp"
-        android:text="@string/log_in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
     <EditText
         android:id="@+id/username_login_edit_text"
-        android:layout_width="300dp"
+        android:layout_width="380dp"
         android:layout_height="50dp"
-        android:layout_marginTop="200dp"
         android:background="@drawable/edit_text_tab_login_register"
         android:drawableStart="@drawable/username_icon"
         android:ems="10"
         android:hint="@string/username"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:paddingStart="10dp"
         app:layout_constraintBottom_toTopOf="@+id/password_login_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
+        app:layout_constraintVertical_bias="0.942"
         tools:ignore="RtlSymmetry" />
 
     <EditText
         android:id="@+id/password_login_edit_text"
-        android:layout_width="300dp"
+        android:layout_width="380dp"
         android:layout_height="50dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="492dp"
         android:background="@drawable/edit_text_tab_login_register"
         android:drawableStart="@drawable/password_icon"
         android:ems="10"
         android:hint="@string/password"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:paddingStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
         tools:ignore="RtlSymmetry" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_account_circle_24"
+        tools:layout_editor_absoluteY="97dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- item_game.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -10,7 +11,7 @@
         android:id="@+id/gameNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:text="1"
+        android:text="@string/_1"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -19,21 +20,23 @@
         android:layout_width="250dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:text="Game Name"
+        android:text="@string/game_name12"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/gamePriceTextView"
         android:layout_width="70dp"
         android:layout_height="35dp"
-        android:text="Price"
+        android:text="@string/price21"
         android:textSize="16sp" />
 
     <ImageButton
         android:id="@+id/deleteButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/close"
         android:scaleType="fitCenter"
-        android:src="@android:drawable/btn_dialog" /> <!-- Set scaleType to fitCenter -->
+        android:src="@android:drawable/btn_dialog"
+        tools:ignore="TouchTargetSizeCheck" /> <!-- Set scaleType to fitCenter -->
 
 </LinearLayout>

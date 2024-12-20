@@ -125,6 +125,59 @@ public class UserManager implements BaseColumns {
         );
     }
 
+    public int updateUserPassword(String username, String newPassword) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PASSWORD, newPassword);
+
+        // Define the WHERE clause to identify the specific user by username
+        String selection = COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = {username};
+
+        // Update the user's password
+        int numRowsUpdated = db.update(TABLE_NAME, values, selection, selectionArgs);
+
+        db.close();
+        return numRowsUpdated;
+    }
+
+    public User getUserByGmail(String gmail) {
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        String[] columns = {
+                COLUMN_USER_ID,
+                COLUMN_USERNAME,
+                COLUMN_GMAIL,
+                COLUMN_PASSWORD
+        };
+
+        Cursor cursor = database.query(
+                TABLE_NAME,
+                columns,
+                COLUMN_GMAIL + " = ?",
+                new String[]{gmail},
+                null,
+                null,
+                null
+        );
+
+        User user = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            user = new User(
+                    cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_GMAIL)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD))
+            );
+            user.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        database.close();
+
+        return user;
+    }
+
     // Add methods specific to User entity
     // ...
 }

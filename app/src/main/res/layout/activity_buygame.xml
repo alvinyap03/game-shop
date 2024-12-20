@@ -4,97 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/profilebkg"
     tools:context=".buygameActivity">
 
     <Button
-        android:id="@+id/csgo_menu2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:text="main menu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/csgo_fps2"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="100dp"
-        android:text="back"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="80dp"
+        android:text="BACK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="50dp"
-        android:textSize="25dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView72"
-        android:layout_width="75dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp"
-        android:text="Game Title:"
-        android:textSize="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="128dp"
+        android:text="@string/game_title"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView73"
-        android:layout_width="190dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="300dp"
-        android:text="Description:"
-        android:textSize="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="364dp"
+        android:text="@string/description1"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView74"
-        android:layout_width="190dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="250dp"
-        android:text="Price:"
-        android:textSize="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="240dp"
+        android:text="@string/price1"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView75"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="50dp"
-        android:textSize="25dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="288dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView70"
-        android:layout_width="350dp"
+        android:layout_width="380dp"
         android:layout_height="150dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="416dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buygame"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="100dp"
-        android:text="buy"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="BUY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

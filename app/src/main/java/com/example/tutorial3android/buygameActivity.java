@@ -30,7 +30,7 @@ public class buygameActivity extends AppCompatActivity {
         TextView gameTitleTextView = findViewById(R.id.textView9);
         TextView priceTextView = findViewById(R.id.textView75);
         TextView descriptionTextView = findViewById(R.id.textView70);
-        Button mainMenuButton = findViewById(R.id.csgo_menu2);
+        // Button mainMenuButton = findViewById(R.id.csgo_menu2);
         Button backButton = findViewById(R.id.csgo_fps2);
         Button buyButton = findViewById(R.id.buygame);
 
@@ -76,21 +76,21 @@ public class buygameActivity extends AppCompatActivity {
                 String displayedGameName = gameTitleTextView.getText().toString();
                 double displayedGamePrice = Double.parseDouble(priceTextView.getText().toString());
 
-                    // User doesn't have the game, handle "Buy" action
-                    Intent mainIntent = new Intent(buygameActivity.this, MainActivity.class);
-                    mainIntent.putExtra("selectedGameName", displayedGameName);
-                    mainIntent.putExtra("selectedGamePrice", displayedGamePrice);
-                    startActivity(mainIntent);
+                // User doesn't have the game, handle "Buy" action
+                Intent mainIntent = new Intent(buygameActivity.this, MainActivity.class);
+                mainIntent.putExtra("selectedGameName", displayedGameName);
+                mainIntent.putExtra("selectedGamePrice", displayedGamePrice);
+                startActivity(mainIntent);
             }
         });
 
-        mainMenuButton.setOnClickListener(new View.OnClickListener() {
+        /* mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(buygameActivity.this, usermenuActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,3 +101,4 @@ public class buygameActivity extends AppCompatActivity {
         });
     }
 }
+

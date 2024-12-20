@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/profilebkg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".debit_Fragment">
 
@@ -12,25 +13,27 @@
 
         <TextView
             android:id="@+id/textView21"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Debit is a formal bookkeeping and accounting term that comes from the Latin word debere, which means (to owe). A debit is an expense, or money paid out from an account, that results in the increase of an asset or a decrease in a liability or owners equity."
+            android:text="@string/debit_is_a_formal_bookkeeping_and_accounting_term_that_comes_from_the_latin_word_debere_which_means_to_owe_a_debit_is_an_expense_or_money_paid_out_from_an_account_that_results_in_the_increase_of_an_asset_or_a_decrease_in_a_liability_or_owners_equity"
             android:textAlignment="center"
+            app:layout_constraintWidth_percent="0.8"
             app:layout_constraintBottom_toTopOf="@+id/enter_debit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintLongText" />
 
         <Button
             android:id="@+id/enter_debit"
-            android:layout_width="wrap_content"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:text="Enter"
+            android:layout_marginTop="92dp"
+            android:text="@string/enter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="92dp"
-            android:layout_marginBottom="352dp"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
     </androidx.constraintlayout.widget.ConstraintLayout>
